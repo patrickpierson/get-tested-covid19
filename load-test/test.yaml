@@ -1,0 +1,24 @@
+---
+execution:
+- concurrency: 10
+  ramp-up: 1m
+  hold-for: 1m30s
+  scenario: simple
+  
+scenarios:
+  simple:
+    think-time: 0.75
+    requests:
+    - https://staging.get-tested-covid19.org/
+    - https://staging.get-tested-covid19.org/test-site-search?zip=12345
+    - https://storage.googleapis.com/covid19-resources/testSites.json
+
+reporting:
+- module: final-stats
+  summary: true
+  percentiles: true
+  summary-labels: false
+  failed-labels: false
+  test-duration: true
+  dump-csv: report.csv
+- console

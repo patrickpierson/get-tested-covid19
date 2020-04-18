@@ -1,0 +1,27 @@
+---
+execution:
+- concurrency: 100
+  ramp-up: 1m
+  hold-for: 10m
+  scenario: simple
+  
+scenarios:
+  simple:
+    think-time: 0.75
+    requests:
+    - https://staging.get-tested-covid19.org/
+    - https://staging.get-tested-covid19.org/static/js/2.2ddf048f.chunk.js
+    - https://staging.get-tested-covid19.org/static/js/main.1fa9dc80.chunk.js
+    - https://staging.get-tested-covid19.org/static/css/main.bb515bc3.chunk.css
+    - https://staging.get-tested-covid19.org/test-site-search?zip=12345
+    - https://storage.googleapis.com/covid19-resources/testSites.json
+
+reporting:
+- module: final-stats
+  summary: true
+  percentiles: true
+  summary-labels: false
+  failed-labels: false
+  test-duration: true
+  dump-csv: report.csv
+- console
